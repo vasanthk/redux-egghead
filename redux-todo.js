@@ -1,8 +1,9 @@
 /*
- * Redux ToDo App
+ * Redux To-Do App
  *
  * @Reference:
  * https://egghead.io/lessons/javascript-redux-the-single-immutable-state-tree?series=getting-started-with-redux
+ * https://jsbin.com/sibuwi/7/edit?html,js,output
  */
 
 const ADD_TODO = 'ADD_TODO';
