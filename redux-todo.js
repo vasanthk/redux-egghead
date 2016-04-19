@@ -139,7 +139,7 @@ const visibilityFilter = (state = Filters.SHOW_ALL, action) => {
     default:
       return state;
   }
-}
+};
 
 const todos = (state = [], action) => {
   switch (action.type) {
@@ -158,7 +158,7 @@ const todos = (state = [], action) => {
     default:
       return state;
   }
-}
+};
 
 const todoApp = Redux.combineReducers({
   visibilityFilter,
@@ -175,7 +175,7 @@ const dispatch = (action) => {
   console.log('----------------');
   console.log('current state:');
   console.log(store.getState());
-}
+};
 const render = () => {
   ReactDOM.render(
     <TodoApp
@@ -184,7 +184,7 @@ const render = () => {
     />,
     document.getElementById('root')
   );
-}
+};
 render();
 store.subscribe(render);
 console.log('current state:');
