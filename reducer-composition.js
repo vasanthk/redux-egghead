@@ -1,4 +1,7 @@
-/*
+/**
+ * Note:
+ * By convention, the state keys should be named after the reducers that manage them.
+ *
  * Open the console
  * to see the state log.
  */
