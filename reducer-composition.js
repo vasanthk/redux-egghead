@@ -24,6 +24,7 @@ const todo = (state, action) => {
         completed: !state.completed
       };
     default:
+      // Remember to have a default case where state is returned to avoid odd bugs in the future.
       return state;
   }
 };
