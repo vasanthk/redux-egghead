@@ -4,6 +4,9 @@
  *
  * Open the console
  * to see the state log.
+ *
+ * More on Reducer composition:
+ * http://blog.javascripting.com/2016/02/02/encapsulation-in-redux/
  */
 
 const todo = (state, action) => {
