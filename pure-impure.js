@@ -1,4 +1,6 @@
 // Pure functions
+// Reference:
+// http://tylermcginnis.com/building-user-interfaces-with-pure-functions-and-function-composition-in-react-js/
 function square(x) {
   return x * x;
 }
