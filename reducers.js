@@ -1,4 +1,5 @@
 // Simple Redux App with reducers.
+// Real world redux: https://speakerdeck.com/chrisui/real-world-redux
 
 const counter = (state = 0, action) => {
   switch (action.type) {
