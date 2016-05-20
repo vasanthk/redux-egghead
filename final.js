@@ -1,3 +1,7 @@
+// Todo-List with Redux
+
+// Reducer composition
+// `todo` reducer is used to populate a section of the todos reducer.
 const todo = (state, action) => {
   switch (action.type) {
     case 'ADD_TODO':
@@ -20,6 +24,7 @@ const todo = (state, action) => {
   }
 };
 
+// The `todos` reducer uses the `todo` reducer in it.
 const todos = (state = [], action) => {
   switch (action.type) {
     case 'ADD_TODO':
@@ -36,8 +41,8 @@ const todos = (state = [], action) => {
   }
 };
 
-const visibilityFilter = (state = 'SHOW_ALL',
-                          action) => {
+// Reducer that tracks the current Visibility filter that is set.
+const visibilityFilter = (state = 'SHOW_ALL', action) => {
   switch (action.type) {
     case 'SET_VISIBILITY_FILTER':
       return action.filter;
@@ -46,12 +51,14 @@ const visibilityFilter = (state = 'SHOW_ALL',
   }
 };
 
+// Helper function provided by Redux to combine the reducers to form the complete state object.
 const { combineReducers } = Redux;
 const todoApp = combineReducers({
   todos,
   visibilityFilter
 });
 
+// Action creators for various actions dispatched.
 let nextTodoId = 0;
 const addTodo = (text) => {
   return {
@@ -75,6 +82,8 @@ const setVisibilityFilter = (filter) => {
   };
 };
 
+
+// Presentational Component to show the link for selecting the visibility filter.
 const { Component } = React;
 const { Provider, connect } = ReactRedux;
 
@@ -99,15 +108,15 @@ const Link = ({
   );
 };
 
-const mapStateToLinkProps = (state,
-                             ownProps) => {
+// Used by connect() to connect to map State to the props that will be passed to the connected Presentational component.
+const mapStateToLinkProps = (state, ownProps) => {
   return {
-    active: ownProps.filter ===
-    state.visibilityFilter
+    active: ownProps.filter === state.visibilityFilter
   };
 };
-const mapDispatchToLinkProps = (dispatch,
-                                ownProps) => {
+
+// Used by connect to pass callbacks that would be used by the presentational component to dispatch user actions.
+const mapDispatchToLinkProps = (dispatch, ownProps) => {
   return {
     onClick: () => {
       dispatch(
@@ -115,12 +124,15 @@ const mapDispatchToLinkProps = (dispatch,
       );
     }
   };
-}
+};
+
+// Container component created by connecting the presentational component to the props and dispatch functions.
 const FilterLink = connect(
   mapStateToLinkProps,
   mapDispatchToLinkProps
 )(Link);
 
+// Footer component that builds UI by using the Redux state connected FilterLink component.
 const Footer = () => (
   <p>
     Show:
@@ -139,6 +151,7 @@ const Footer = () => (
   </p>
 );
 
+// Simple list element presentational component.
 const Todo = ({
   onClick,
   completed,
@@ -157,6 +170,8 @@ const Todo = ({
   </li>
 );
 
+// Todolist component that puts together all the todo list items
+// While you map() and generate multiple versions of a component, it is advised to add in `key` attributes to identify individual references.
 const TodoList = ({
   todos,
   onTodoClick
@@ -173,10 +188,11 @@ const TodoList = ({
 );
 
 let AddTodo = ({ dispatch }) => {
-  let input;
+  let input; // Save a reference to the <input> node.
 
   return (
     <div>
+      {/* More on Refs: https://facebook.github.io/react/docs/more-about-refs.html */}
       <input ref={node => {
         input = node;
       }}/>
@@ -191,8 +207,7 @@ let AddTodo = ({ dispatch }) => {
 };
 AddTodo = connect()(AddTodo);
 
-const getVisibleTodos = (todos,
-                         filter) => {
+const getVisibleTodos = (todos, filter) => {
   switch (filter) {
     case 'SHOW_ALL':
       return todos;
@@ -205,7 +220,7 @@ const getVisibleTodos = (todos,
         t => !t.completed
       );
   }
-}
+};
 
 const mapStateToTodoListProps = (state) => {
   return {
